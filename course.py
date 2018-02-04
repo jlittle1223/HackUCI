@@ -11,6 +11,12 @@ class Course:
         self.totalPrerequisites = []
         self.sumOfProducts = True
         self.sumOfProductsList = []
+        self.localPrerequisites = set()
+        self.totalPrerequisites = set()
+        self.sumOfProducts = True
+        self.sumOfProductsList = []
+        self.numTotalPrerequisites = 0
+        self.numLocalPrerequisites = 0
         
         
         
@@ -33,12 +39,16 @@ class Course:
                 self.addPrerequisiteDisjunction(disjunction)
             else:
                 self.addPrerequisite(prerequisite)
+        self.localPrerequisites.add(prerequisite)
+        self.numLocalPrerequisites += 1
         
         
         
     def addPrerequisiteDisjunction(self, prerequisiteDisjunction:list):
         self.sumOfProductsList.append(prerequisiteDisjunction)
         self.prerequisites.append(prerequisiteDisjunction)
+        #self.localPrerequisites.add(prerequisiteDisjunction)
+        self.numLocalPrerequisites += len(prerequisiteDisjunction)
         
         
         

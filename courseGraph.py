@@ -72,6 +72,11 @@ class CourseGraph(DirectedGraph):
         
         return vertex_to_return 
         
+=======
+class CourseGraph(DirectedGraph):
+    def __init__(self, vertex_nums:[int] = [], edges_to_add:[(int,int)] = []):
+        DirectedGraph.__init__(self, vertex_nums, edges_to_add)
+        
         
         
     def add_vertex(self, vertex_num:int, data, edges_to_add:[int] = []) -> None:
@@ -134,6 +139,21 @@ if __name__ == "__main__":
     
     g1 = CourseGraph([], [], course_list)
     
+=======
+    g1 = CourseGraph()
+    g1.add_vertex(0, cs161)
+    g1.add_vertex(1, ics6b, [0])
+    g1.add_vertex(2, ics6d, [0])
+    g1.add_vertex(3, math2b, [0])
+    
+    g1.add_vertex(4, ics6n)
+    g1.add_vertex(5, math3a)
+    ics6n_vertex = g1.get_vertex(4)
+    math3a_vertex = g1.get_vertex(5)
+    g1.add_disjunction_edge(ics6n_vertex, g1.get_vertex(0), 0)
+    g1.add_disjunction_edge(math3a_vertex, g1.get_vertex(0), 0)
+    
+    g1.add_vertex(6, ics46, [0])
     
     print(g1)
     
