@@ -7,6 +7,10 @@ class Course:
     
     def __init__(self, name):
         self.name = name
+        self.prerequisites = []
+        self.totalPrerequisites = []
+        self.sumOfProducts = True
+        self.sumOfProductsList = []
         self.localPrerequisites = set()
         self.totalPrerequisites = set()
         self.sumOfProducts = True
@@ -24,6 +28,17 @@ class Course:
         '''
         self.sumOfProducts = self.sumOfProducts and prerequisite.sumOfProducts
         self.sumOfProductsList.append(prerequisite)
+        self.prerequisites.append(prerequisite)
+        
+    def addPrerequisites(self, prerequisite_list:['course']):
+        for prerequisite in prerequisite_list:
+            if type(prerequisite) == list:
+                disjunction = []
+                for i in range(len(prerequisite)):
+                    disjunction.append(prerequisite[i])
+                self.addPrerequisiteDisjunction(disjunction)
+            else:
+                self.addPrerequisite(prerequisite)
         self.localPrerequisites.add(prerequisite)
         self.numLocalPrerequisites += 1
         
@@ -31,6 +46,7 @@ class Course:
         
     def addPrerequisiteDisjunction(self, prerequisiteDisjunction:list):
         self.sumOfProductsList.append(prerequisiteDisjunction)
+        self.prerequisites.append(prerequisiteDisjunction)
         #self.localPrerequisites.add(prerequisiteDisjunction)
         self.numLocalPrerequisites += len(prerequisiteDisjunction)
         

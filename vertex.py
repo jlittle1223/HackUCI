@@ -38,5 +38,7 @@ class Vertex():
     def __str__(self) -> str:
         return "Vertex({num}, {data}, {edges})".format(
             num = self._num,
+            data = self._data,
+=======
             data = self.data,
             edges = ["Edge({n}, {v})".format(n = x.get_num(), v = x.get_vertices()) for x in self._edges])
